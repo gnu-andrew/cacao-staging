@@ -680,7 +680,7 @@ case "${WITH_JAVA_RUNTIME_LIBRARY}" in
         AC_CHECK_WITH_HPI_H
         AC_CHECK_WITH_JMM_H
         ;;
-    openjdk7)
+    openjdk7 | openjdk8 )
         AC_CHECK_WITH_JVM_MD_H
         AC_CHECK_WITH_JVM_H
         AC_CHECK_WITH_JMM_H
@@ -695,7 +695,7 @@ case "${WITH_JAVA_RUNTIME_LIBRARY}" in
     cldc1.1 | gnuclasspath)
         AC_PROG_JAVAC
         ;;
-    openjdk | openjdk7)
+    openjdk | openjdk7 | openjdk8 )
         ;;
     *)
         AC_MSG_ERROR(unknown classpath configuration ${WITH_JAVA_RUNTIME_LIBRARY})

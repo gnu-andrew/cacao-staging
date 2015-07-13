@@ -35,7 +35,7 @@ AC_ARG_ENABLE([test-dependency-checks],
                   cldc1.1 | gnuclasspath)
                       disable_test_dependency_checks=no
                       ;;
-                  openjdk | openjdk7)
+                  openjdk | openjdk7 | openjdk8 )
                       disable_test_dependency_checks=yes
                       ;;
                   *)

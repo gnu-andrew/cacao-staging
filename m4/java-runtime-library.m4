@@ -26,7 +26,7 @@ dnl which Java runtime library should we use
 AC_DEFUN([AC_CHECK_WITH_JAVA_RUNTIME_LIBRARY],[
 AC_MSG_CHECKING(which Java runtime library to use)
 AC_ARG_WITH([java-runtime-library],
-            [AS_HELP_STRING(--with-java-runtime-library=<type>,specifies which type of classpath to use as Java runtime library (cldc1.1,gnuclasspath,openjdk,openjdk7) [[default=gnuclasspath]])],
+            [AS_HELP_STRING(--with-java-runtime-library=<type>,specifies which type of classpath to use as Java runtime library (cldc1.1,gnuclasspath,openjdk,openjdk7,openjdk8) [[default=gnuclasspath]])],
             [case "${withval}" in
                 cldc1.1)
                     WITH_JAVA_RUNTIME_LIBRARY=cldc1.1
@@ -37,6 +37,15 @@ AC_ARG_WITH([java-runtime-library],
                     WITH_JAVA_RUNTIME_LIBRARY=gnuclasspath
                     AC_DEFINE([WITH_JAVA_RUNTIME_LIBRARY_GNU_CLASSPATH], 1, [use GNU Classpath])
                     AC_SUBST(WITH_JAVA_RUNTIME_LIBRARY_GNU_CLASSPATH)
+                    ;;
+                openjdk8)
+                    WITH_JAVA_RUNTIME_LIBRARY=openjdk8
+                    AC_DEFINE([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK], 1, [use OpenJDK's Java SE classes])
+                    AC_DEFINE([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_7], 1, [use OpenJDK's version 7])
+                    AC_DEFINE([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_8], 1, [use OpenJDK's version 8])
+                    AC_SUBST(WITH_JAVA_RUNTIME_LIBRARY_OPENJDK)
+                    AC_SUBST(WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_7)
+                    AC_SUBST(WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_8)
                     ;;
                 openjdk7)
                     WITH_JAVA_RUNTIME_LIBRARY=openjdk7
@@ -60,8 +69,9 @@ AC_ARG_WITH([java-runtime-library],
 AC_MSG_RESULT(${WITH_JAVA_RUNTIME_LIBRARY})
 AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_CLDC1_1], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xcldc1.1")
 AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_GNU_CLASSPATH], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xgnuclasspath")
-AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk" -o x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk7")
+AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk" -o x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk7" -o x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk8")
 AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_7], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk7")
+AM_CONDITIONAL([WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_8], test x"${WITH_JAVA_RUNTIME_LIBRARY}" = "xopenjdk8")
 ])
 
 

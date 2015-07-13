@@ -3755,7 +3755,9 @@ void JVM_GetVersionInfo(JNIEnv* env, jvm_version_info* info, size_t info_size)
 	info->update_version = 0;
 	info->special_update_version = 0;
 	info->is_attach_supported = 0;
+#ifndef WITH_JAVA_RUNTIME_LIBRARY_OPENJDK_8
 	info->is_kernel_jvm = 0;
+#endif
 }
 
 

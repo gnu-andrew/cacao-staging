@@ -1,3 +1,19 @@
+2015-07-12  Andrew John Hughes  <gnu_andrew@member.fsf.org>
+
+	IT2349: ‘struct jvm_version_info’ has no member named
+	‘is_kernel_jvm’
+	IT2355: CACAO build fails to use JRE layout
+	* configure.ac:
+	Extend case statements to include 'openjdk8'.
+	* m4/disable-test-dependency-checks.m4:
+	Likewise.
+	* m4/java-runtime-library.m4:
+	(AC_CHECK_WITH_JAVA_RUNTIME_LIBRARY):
+	Add openjdk8.
+	* src/native/vm/openjdk/jvm.cpp:
+	(JVM_GetVersionInfo(JNIEnv*,jvm_version_info*,size_t)):
+	Only set is_kernel_jvm on OpenJDK < 8.
+
 2008-06-14  Christian Thalinger  <twisti@complang.tuwien.ac.at>
 
 	* configure.ac:
