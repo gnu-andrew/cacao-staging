@@ -3843,6 +3843,30 @@ jint JVM_FindSignal(const char *name)
 	return -1;
 }
 
+/*
+ * Return the temporary directory that the VM uses for the attach
+ * and perf data files.
+ *
+ * It is important that this directory is well-known and the
+ * same for all VM instances. It cannot be affected by configuration
+ * variables such as java.io.tmpdir.
+ */
+jstring JVM_GetTemporaryDirectory(JNIEnv *env)
+{
+	TRACEJVMCALLS(("JVM_GetTemporaryDirectory(env=%p)", env));
+
+#if (defined(__LINUX__) || defined (__SOLARIS__) || \
+	 defined(__FREEBSD__) || defined (__DARWIN__))
+	// This must be hard coded because it's the system's temporary
+	// directory not the java application's temp directory, ala java.io.tmpdir.
+	return JavaString::from_utf8("/tmp");
+#else
+# error Not implemented for this OS.
+#endif
+
+	return NULL;
+}
+	
 } // extern "C"
 
 
