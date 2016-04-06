@@ -252,7 +252,7 @@ bool method_load(ClassBuffer& cb, methodinfo *m, DescriptorPool& descpool)
 
 			if (i != 0 && i != ACC_PUBLIC && i != ACC_PRIVATE && i != ACC_PROTECTED) {
 				exceptions_throw_classformaterror(c,
-												  "Illegal method modifiers: 0x%X",
+												  "Illegal method access modifiers: 0x%X",
 												  m->flags);
 				return false;
 			}
@@ -261,18 +261,28 @@ bool method_load(ClassBuffer& cb, methodinfo *m, DescriptorPool& descpool)
 				if ((m->flags & (ACC_FINAL | ACC_NATIVE | ACC_PRIVATE |
 								 ACC_STATIC | ACC_STRICT | ACC_SYNCHRONIZED))) {
 					exceptions_throw_classformaterror(c,
-													  "Illegal method modifiers: 0x%X",
+													  "Illegal abstract method modifiers: 0x%X",
 													  m->flags);
 					return false;
 				}
 			}
 
 			if (c->flags & ACC_INTERFACE) {
-				if ((m->flags & (ACC_ABSTRACT | ACC_PUBLIC)) != (ACC_ABSTRACT | ACC_PUBLIC)) {
-					exceptions_throw_classformaterror(c,
-													  "Illegal method modifiers: 0x%X",
-													  m->flags);
-					return false;
+				if (c->version < ClassFileVersion::JDK_8) {
+					if ((m->flags & (ACC_ABSTRACT | ACC_PUBLIC)) != (ACC_ABSTRACT | ACC_PUBLIC)) {
+						exceptions_throw_classformaterror(c,
+														  "Illegal interface method modifiers: 0x%X",
+														  m->flags);
+						return false;
+					}
+				} else {
+					i = (m->flags & (ACC_PUBLIC | ACC_PRIVATE));
+					if (i != ACC_PUBLIC && i != ACC_PRIVATE) {
+						exceptions_throw_classformaterror(c,
+														  "Illegal JDK 8 interface method modifiers: 0x%X",
+														  m->flags);
+						return false;
+					}
 				}
 			}
 

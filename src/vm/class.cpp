@@ -678,17 +678,26 @@ static void class_freecpool(classinfo *c)
 
 void* class_getconstant(classinfo *c, u4 pos, ConstantPoolTag ctype)
 {
+	return class_getconstant(c, pos, ctype, CONSTANT_UNUSED);
+}
+
+void* class_getconstant(classinfo *c, u4 pos, ConstantPoolTag ctype, ConstantPoolTag ctype2)
+{
 	// check index and type of constantpool entry
 	// (pos == 0 is caught by type comparison)
-
-	if ((((int32_t)pos) >= c->cpcount) || (c->cptags[pos] != ctype)) {
+	bool typematch = (c->cptags[pos] == ctype || (ctype2 != CONSTANT_UNUSED && c->cptags[pos] == ctype2));
+	if ((((int32_t)pos) >= c->cpcount) || !typematch) {
 		// this is the slow path,
 		// we can afford to repeat the separate checks for a better error message
 
 		if ((pos == 0) || (((int32_t)pos) >= c->cpcount)) {
 			exceptions_throw_classformaterror(c, "Illegal constant pool index: %u", pos);
-		} else if (c->cptags[pos] != ctype) {
-			exceptions_throw_classformaterror(c, "Illegal constant pool type %u (expected %u)", ctype, c->cptags[pos]);
+		} else if (!typematch) {
+			if (ctype2 == CONSTANT_UNUSED)
+				exceptions_throw_classformaterror(c, "Illegal constant pool type %u (expected %u)", c->cptags[pos], ctype);
+			else
+				exceptions_throw_classformaterror(c, "Illegal constant pool type %u (expected %u or %u)",
+												  c->cptags[pos], ctype, ctype2);
 		}
 
 		assert(exceptions_get_exception());

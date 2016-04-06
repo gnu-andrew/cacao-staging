@@ -126,6 +126,7 @@ inline void *operator new(std::size_t size, ConstantPoolPlacement) {
 
 const ClassFileVersion ClassFileVersion::CACAO_VERSION(MAJOR_VERSION, MINOR_VERSION);
 const ClassFileVersion ClassFileVersion::JDK_7(51, 0);
+const ClassFileVersion ClassFileVersion::JDK_8(52, 0);
 
 
 /* loader_preinit **************************************************************
@@ -1848,12 +1849,29 @@ static bool load_class_from_classbuffer_intern(ClassBuffer& cb)
 			break;
 
 		case REF_invokeVirtual:
-		case REF_invokeStatic:
-		case REF_invokeSpecial:
 			fmi  = (constant_FMIref*) class_getconstant(c, it->reference_index, CONSTANT_Methodref);
 
 			if (!fmi)
 				return false;
+
+			if (fmi->name == utf8::init || fmi->name == utf8::clinit) {
+				exceptions_throw_classformaterror(c, "Illegal method handle");
+				return false;
+			}
+			break;
+			
+		case REF_invokeStatic:
+		case REF_invokeSpecial:
+			if (c->version >= ClassFileVersion::JDK_8) {
+				fmi  = (constant_FMIref*) class_getconstant(c, it->reference_index,
+															CONSTANT_Methodref, CONSTANT_InterfaceMethodref);
+			} else {
+				fmi  = (constant_FMIref*) class_getconstant(c, it->reference_index, CONSTANT_Methodref);
+			}
+			
+			if (!fmi) {
+				return false;
+			}
 
 			if (fmi->name == utf8::init || fmi->name == utf8::clinit) {
 				exceptions_throw_classformaterror(c, "Illegal method handle");

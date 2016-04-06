@@ -1,3 +1,39 @@
+2016-04-05  Andrew John Hughes  <gnu_andrew@member.fsf.org>
+
+	IT2910: Add rudimentary support for OpenJDK 8 class files
+	* src/vm/class.cpp:
+	(class_getconstant(classinfo,u4,ConstantPoolTag)):
+	Redirect to class_getconstant(classinfo,u4,ConstantPoolTag,
+	ConstantPoolTag) with CONSTANT_UNUSED as final argument.
+	(class_getconstant(classinfo,u4,ConstantPoolTag,
+	ConstantPoolTag)): Former three-argument version.
+	Now will except either of the two ctype arguments.
+	Fixed error message so given + expected are the right
+	way around.
+	* src/vm/class.hpp:
+	Declare new four-argument class_getconstant.
+	* src/vm/global.hpp:
+	(JAVA_VERSION): Bump to 1.8.0.
+	(CLASS_VERSION): Bump to 52.0
+	(MAJOR_VERSION): Bump to 52.
+	* src/vm/loader.cpp:
+	(JDK_8): Added (version 52.0).
+	(load_class_from_classbuffer_intern(ClassBuffer)):
+	Split handling of REF_invokeVirtual from REF_invokeStatic
+	and REF_invokeSpecial. Allow the latter two to take
+	a CONSTANT_InterfaceMethodRef in OpenJDK 8 bytecode files;
+	see 4.4.8 of JVM spec.
+	* src/vm/loader.hpp:
+	(JDK_8): Declared.
+	(operator >): Implemented as the inverse of <=.
+	(operator >=): Implemented on top of >.
+	* src/vm/method.cpp:
+	(method_load(ClassBuffer,methodinfo,DescriptorPool)):
+	Make it easier to distingush which method access modifier
+	error is thrown. Allow interface methods to be public or
+	private in OpenJDK 8 class files without ACC_ABSTRACT
+	having to be set; see 4.6 in JVM spec.
+
 2015-07-13  Andrew John Hughes  <gnu_andrew@member.fsf.org>
 
 	IT2035: --enable-cacao builds broken,

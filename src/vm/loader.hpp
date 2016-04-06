@@ -116,6 +116,10 @@ namespace cacao {
 		 */
 		static const ClassFileVersion JDK_7;
 
+		/**
+		 * The class file format version used by JDK 8
+		 */
+		static const ClassFileVersion JDK_8;
 
 		ClassFileVersion(uint16_t major, uint16_t minor = 0) : _majr(major), _minr(minor) {}
 
@@ -141,6 +145,14 @@ namespace cacao {
 			return (*this == v) || (*this < v);
 		}
 
+		bool operator >(ClassFileVersion v) const {
+			return !(*this <= v);
+		}
+
+		bool operator >=(ClassFileVersion v) const {
+			return (*this == v) || (*this > v);
+		}
+	   
 		// we can't call these major/minor because GCC defines macros of that name
 		uint16_t majr() const { return _majr; }
 		uint16_t minr() const { return _minr; }

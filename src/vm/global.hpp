@@ -142,13 +142,13 @@ enum Type {
 
 /* some Java related defines **************************************************/
 
-#define JAVA_VERSION    "1.6.0"         /* this version is supported by CACAO */
-#define CLASS_VERSION   "51.0"
+#define JAVA_VERSION    "1.8.0"         /* this version is supported by CACAO */
+#define CLASS_VERSION   "52.0"
 
 /* Java class file constants **************************************************/
 
 #define MAGIC             0xCAFEBABE
-#define MAJOR_VERSION     51
+#define MAJOR_VERSION     52
 #define MINOR_VERSION     0
 
 

@@ -196,6 +196,7 @@ bool       class_initializing_thread_is_self(classinfo *c);
 
 /* retrieve constantpool element */
 void* class_getconstant(classinfo *c, u4 pos, ConstantPoolTag ctype);
+void* class_getconstant(classinfo *c, u4 pos, ConstantPoolTag ctype, ConstantPoolTag ctype2);
 void* innerclass_getconstant(classinfo *c, u4 pos, ConstantPoolTag ctype);
 
 /* frees all resources used by the class */
