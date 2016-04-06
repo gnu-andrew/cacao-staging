@@ -1094,6 +1094,15 @@ jbyteArray JVM_GetClassAnnotations(JNIEnv *env, jclass cls)
 	return (jbyteArray) annotations;
 }
 
+/* JVM_GetClassTypeAnnotations */
+
+jbyteArray JVM_GetClassTypeAnnotations(JNIEnv *env, jclass cls)
+{
+	TRACEJVMCALLS(("JVM_GetClassAnnotations(env=%p, cls=%p)", env, cls));
+
+	log_println("JVM_GetClassTypeAnnotations: IMPLEMENT ME!");
+	return NULL;
+}
 
 /* JVM_GetFieldAnnotations */
 
@@ -1109,6 +1118,16 @@ jbyteArray JVM_GetFieldAnnotations(JNIEnv *env, jobject field)
 	}
 
 	return (jbyteArray) jlrf.get_annotations();
+}
+
+/* JVM_GetFieldTypeAnnotations */
+
+jbyteArray JVM_GetFieldTypeAnnotations(JNIEnv *env, jobject field)
+{
+	TRACEJVMCALLS(("JVM_GetFieldTypeAnnotations(env=%p, field=%p)", env, field));
+
+	log_println("JVM_GetFieldTypeAnnotations: IMPLEMENT ME!");
+	return NULL;
 }
 
 
@@ -1128,6 +1147,15 @@ jbyteArray JVM_GetMethodAnnotations(JNIEnv *env, jobject method)
 	return (jbyteArray) jlrm.get_annotations();
 }
 
+/* JVM_GetMethodTypeAnnotations */
+
+jbyteArray JVM_GetMethodTypeAnnotations(JNIEnv *env, jobject method)
+{
+	TRACEJVMCALLS(("JVM_GetMethodTypeAnnotations(env=%p, method=%p)", env, method));
+
+	log_println("JVM_GetMethodTypeAnnotations: IMPLEMENT ME!");
+	return NULL;
+}
 
 /* JVM_GetMethodDefaultAnnotationValue */
 
@@ -1162,6 +1190,14 @@ jbyteArray JVM_GetMethodParameterAnnotations(JNIEnv *env, jobject method)
 	return (jbyteArray) jlrm.get_parameterAnnotations();
 }
 
+/* JVM_GetMethodParameters */
+
+jbyteArray JVM_GetMethodParameters(JNIEnv *env, jobject method) {
+	TRACEJVMCALLS(("JVM_GetMethodParameters(env=%p, method=%p)", env, method));
+
+	log_println("JVM_GetMethodParameters: IMPLEMENT ME!");
+	return NULL;
+}
 
 /* JVM_GetClassDeclaredFields */
 
@@ -1848,6 +1884,14 @@ jboolean JVM_IsConstructorIx(JNIEnv *env, jclass cls, int method_index)
 	return 0;
 }
 
+/* JVM_IsVMGeneratedMethodIx */
+
+jboolean JVM_IsVMGeneratedMethodIx(JNIEnv *env, jclass cls, int method_index)
+{
+    log_println("JVM_IsVMGeneratedMethodIx: IMPLEMENT ME!");
+
+    return 0;
+}
 
 /* JVM_GetMethodIxNameUTF */
 

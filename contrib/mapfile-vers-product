@@ -127,12 +127,14 @@ SUNWprivate_1.1 {
                 JVM_GetClassNameUTF;
                 JVM_GetClassSignature;
                 JVM_GetClassSigners;
+		JVM_GetClassTypeAnnotations;
                 JVM_GetComponentType;
                 JVM_GetDeclaredClasses;
                 JVM_GetDeclaringClass;
                 JVM_GetEnclosingMethodInfo;
                 JVM_GetFieldAnnotations;
                 JVM_GetFieldIxModifiers;
+		JVM_GetFieldTypeAnnotations;
                 JVM_GetHostName;
                 JVM_GetInheritedAccessControlContext;
                 JVM_GetInterfaceVersion;
@@ -153,6 +155,8 @@ SUNWprivate_1.1 {
                 JVM_GetMethodIxNameUTF;
                 JVM_GetMethodIxSignatureUTF;
                 JVM_GetMethodParameterAnnotations;
+		JVM_GetMethodParameters;
+		JVM_GetMethodTypeAnnotations;
 		JVM_GetResourceLookupCacheURLs;
 		JVM_GetResourceLookupCache;
                 JVM_GetPrimitiveArrayElement;
@@ -180,6 +184,7 @@ SUNWprivate_1.1 {
                 JVM_InvokeMethod;
                 JVM_IsArrayClass;
                 JVM_IsConstructorIx;
+		JVM_IsVMGeneratedMethodIx;
                 JVM_IsInterface;
                 JVM_IsInterrupted;
                 JVM_IsNaN;
