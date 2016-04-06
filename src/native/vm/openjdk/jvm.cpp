@@ -3866,6 +3866,32 @@ jstring JVM_GetTemporaryDirectory(JNIEnv *env)
 
 	return NULL;
 }
+/* JVM_GetResourceLookupCacheURLs */
+
+jobjectArray JVM_GetResourceLookupCacheURLs(JNIEnv *env, jobject loader)
+{
+	TRACEJVMCALLS(("JVM_GetResourceLookupCacheURLs(env=%p, loader=%p)", env, loader));
+
+	return NULL; // tell OpenJDK 8 that the lookup cache API is unavailable
+}
+
+/* JVM_GetResourceLookupCache */
+
+jintArray JVM_GetResourceLookupCache(JNIEnv *env, jobject loader, const char *resource_name)
+{
+	TRACEJVMCALLS(("JVM_GetResourceLookupCacheURLs(env=%p, loader=%p, resource_name=%s)", env, loader, resource_name));
+
+	return NULL; // tell OpenJDK 8 that the lookup cache API is unavailable
+}
+
+/* JVM_GetResourceLookupCache */
+
+jboolean JVM_KnownToNotExist(JNIEnv *env, jobject loader, const char *classname)
+{
+	TRACEJVMCALLS(("JVM_GetResourceLookupCacheURLs(env=%p, loader=%p, classname=%s)", env, loader, classname));
+
+	return JNI_FALSE; // tell OpenJDK 8 we don't know whether it exists or not
+}
 	
 } // extern "C"
 

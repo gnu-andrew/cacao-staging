@@ -153,6 +153,8 @@ SUNWprivate_1.1 {
                 JVM_GetMethodIxNameUTF;
                 JVM_GetMethodIxSignatureUTF;
                 JVM_GetMethodParameterAnnotations;
+		JVM_GetResourceLookupCacheURLs;
+		JVM_GetResourceLookupCache;
                 JVM_GetPrimitiveArrayElement;
                 JVM_GetProtectionDomain;
                 JVM_GetSockName;
@@ -186,6 +188,7 @@ SUNWprivate_1.1 {
                 JVM_IsSilentCompiler;
                 JVM_IsSupportedJNIVersion;
                 JVM_IsThreadAlive;
+		JVM_KnownToNotExist;
                 JVM_LatestUserDefinedLoader;
                 JVM_Listen;
                 JVM_LoadClass0;

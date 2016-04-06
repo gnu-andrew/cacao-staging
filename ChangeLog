@@ -1,3 +1,18 @@
+2016-03-31  Andrew John Hughes  <gnu_andrew@member.fsf.org>
+
+	IT2776: CACAO lacks JVM_GetResourceLookupCacheURLs
+	introduced by jdk8u40
+	* contrib/mapfile-vers-product:
+	Export JVM_GetResourceLookupCacheURLs,
+	JVM_GetResourceLookupCache and
+	JVM_KnownToNotExist.
+	* src/native/vm/openjdk/jvm.cpp:
+	(JVM_GetResourceLookupCacheURLs):
+	Add a stub saying we don't support this
+	API.
+	(JVM_GetResourceLookupCache): Likewise.
+	(JVM_KnownToNotExist): Likewise.
+
 2016-04-05  Andrew John Hughes  <gnu_andrew@member.fsf.org>
 
 	IT2910: Add rudimentary support for OpenJDK 8 class files
